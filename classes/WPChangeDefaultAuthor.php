@@ -2,6 +2,7 @@
 
 class WPChangeDefaultAuthor {
 
+	const AUTHOR_OPTION_NAME = 'wp_change_default_author__author';
 	private static $initiated = false;
 
 	public static function init() {
@@ -38,7 +39,7 @@ class WPChangeDefaultAuthor {
 	 */
 	public static function post_author_meta_box( $post ) {
 		global $user_ID;
-		$default_author = get_option( 'wp_change_default_author__author' );
+		$default_author = get_option( self::AUTHOR_OPTION_NAME );
 
 		if ( 'auto-draft' === $post->post_status ) {
 			$is_new_post = true;
@@ -73,7 +74,7 @@ class WPChangeDefaultAuthor {
 		);
 		register_setting(
 			'general',
-			'wp_change_default_author__author',
+			self::AUTHOR_OPTION_NAME,
 			array(
 				'type' => 'integer',
 				'description' => __( 'change post default author.', 'wp-change-default-user' ),
@@ -85,7 +86,7 @@ class WPChangeDefaultAuthor {
 	public static function author_sanitize_callback( $value ) {
 		if ( ! self::validate_author_id( $value ) ) {
 			add_settings_error( 'general', 'wp_change_default_author__author__is_not_author', __( "Not valid vaule $value", 'wp-change-default-user' ) );
-			return get_option( 'wp_change_default_author__author' );
+			return get_option( self::AUTHOR_OPTION_NAME );
 		}
 		$sanitized_value = intval( $value );
 		if ( $sanitized_value === -1 ) {
@@ -119,11 +120,11 @@ class WPChangeDefaultAuthor {
 	}
 
 	public static function author_field() {
-		$selected = get_option( 'wp_change_default_author__author' );
+		$selected = get_option( self::AUTHOR_OPTION_NAME );
 		wp_dropdown_users(
 			array(
 				'who'              => 'authors',
-				'name'             => 'wp_change_default_author__author',
+				'name'             => self::AUTHOR_OPTION_NAME,
 				'show_option_none' => __( 'Not Set', 'wp-change-default-author' ),
 				'selected'         =>  $selected ? $selected : -1,
 				'include_selected' => true,
