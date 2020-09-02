@@ -41,6 +41,7 @@ class WPChangeDefaultAuthor {
 		global $user_ID;
 		$default_author = get_option( self::AUTHOR_OPTION_NAME );
 
+		$is_new_post = false;
 		if ( 'auto-draft' === $post->post_status ) {
 			$is_new_post = true;
 		}
