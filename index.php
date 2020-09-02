@@ -30,3 +30,8 @@ define( 'WP_CHANGE_DEFAULT_AUTHOR__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 require_once( WP_CHANGE_DEFAULT_AUTHOR__PLUGIN_DIR . 'classes/WPChangeDefaultAuthor.php' );
 
 add_action( 'init', array( 'WPChangeDefaultAuthor', 'init' ) );
+
+function WPChangeDefaultAuthor__uninstall() {
+	delete_option( WPChangeDefaultAuthor::AUTHOR_OPTION_NAME );
+}
+register_uninstall_hook( __FILE__, 'WPChangeDefaultAuthor__uninstall' );
