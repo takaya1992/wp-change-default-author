@@ -70,11 +70,11 @@ class WPChangeDefaultAuthor {
 			'wp-change-default-author',
 			__( 'Default Author', 'wp-change-default-author' ),
 			array( 'WPChangeDefaultAuthor', 'author_field' ),
-			'general',
+			'writing',
 			'default'
 		);
 		register_setting(
-			'general',
+			'writing',
 			self::AUTHOR_OPTION_NAME,
 			array(
 				'type' => 'integer',
