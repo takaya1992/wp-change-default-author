@@ -78,7 +78,7 @@ class WPChangeDefaultAuthor {
 			self::AUTHOR_OPTION_NAME,
 			array(
 				'type' => 'integer',
-				'description' => __( 'change post default author.', 'wp-change-default-user' ),
+				'description' => __( 'change post default author.', 'wp-change-default-author' ),
 				'sanitize_callback' => array( 'WPChangeDefaultAuthor', 'author_sanitize_callback' )
 			)
 		);
